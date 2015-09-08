@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Poisk.Core.Biz;
+using Poisk.Core.Bootstrap;
+using StructureMap;
 
 namespace Poisk
 {
     class Program
     {
+        private static Container _container;
+
         static void Main(string[] args)
         {
+            _container = new Container(x =>
+            {
+                x.AddRegistry<CoreRegistry>();
+            });
+
+            var sampleService = _container.GetInstance<ISampleService>();
         }
     }
 }
