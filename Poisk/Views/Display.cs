@@ -9,6 +9,7 @@ namespace Poisk.Views
     {
         public Display()
         {
+            ShowGreeting();
             PlayerName = GetPlayerName();
         }
         
@@ -16,6 +17,11 @@ namespace Poisk.Views
         /// The player character's name.
         /// </summary>
         public string PlayerName { get; set; }
+
+        private void ShowGreeting()
+        {
+            Console.WriteLine("Welcome to Poisk.");
+        }
 
         private string GetPlayerName()
         {
