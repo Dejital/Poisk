@@ -1,4 +1,5 @@
 ﻿using Poisk.Core.Biz;
+using Poisk.Core.Biz.Impl;
 using StructureMap.Configuration.DSL;
 
 namespace Poisk.Core.Bootstrap

@@ -47,15 +47,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Biz\Impl\SampleService.cs" />
     <Compile Include="Biz\ISampleService.cs" />
-    <Compile Include="Biz\SampleService.cs" />
     <Compile Include="Bootstrap\CoreRegistry.cs" />
+    <Compile Include="Model\IBeing.cs" />
+    <Compile Include="Model\Impl\Baddie.cs" />
+    <Compile Include="Model\Impl\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Common\" />
     <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
