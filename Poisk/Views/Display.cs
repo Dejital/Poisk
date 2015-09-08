@@ -23,9 +23,11 @@ namespace Poisk.Views
             while (string.IsNullOrEmpty(name))
             {
                 var message = GetPromptMessage("What is your name?");
+                Console.Beep(262, 500);
                 Console.Write(message);
                 name = Console.ReadLine();
             }
+            Console.Beep(392, 500);
             return name;
         }
 
