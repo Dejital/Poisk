@@ -47,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Biz\Impl\PlayerFactory.cs" />
     <Compile Include="Biz\Impl\SampleService.cs" />
+    <Compile Include="Biz\IPlayerFactory.cs" />
     <Compile Include="Biz\ISampleService.cs" />
     <Compile Include="Bootstrap\CoreRegistry.cs" />
     <Compile Include="Model\IBeing.cs" />

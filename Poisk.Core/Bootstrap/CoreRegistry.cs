@@ -9,6 +9,7 @@ namespace Poisk.Core.Bootstrap
         public CoreRegistry()
         {
             For<ISampleService>().Singleton().Use<SampleService>();
+            For<IPlayerFactory>().Singleton().Use<PlayerFactory>();
         }
     }
 }

@@ -7,11 +7,11 @@ namespace Poisk.Core.Model.Impl
     /// </summary>
     internal class Player : IBeing
     {
-        public Player(string name, int health, bool isAlive)
+        public Player(string name, int health)
         {
             Name = name;
             Health = health;
-            IsAlive = isAlive;
+            IsAlive = true;
             Inventory = new List<string>();
         }
 
