@@ -25,7 +25,10 @@ namespace Poisk.Controllers
         {
             _container = CreateContainer();
             var display = new Display();
-            var pc = CreatePlayer(display.PlayerName);
+            display.DisplayMessage("Welcome to Poisk.");
+
+            var playerName = display.GetNonEmptyStringResponse("What is your name?");
+            var pc = CreatePlayer(playerName);
             var playerActionDictionary = GetPlayerActionDictionary();
 
             while (pc.IsAlive)
