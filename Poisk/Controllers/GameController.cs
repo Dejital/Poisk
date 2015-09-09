@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Poisk.Core.Biz;
 using Poisk.Core.Bootstrap;
+using Poisk.Core.Common;
 using Poisk.Core.Model;
 using Poisk.Views;
 using Container = StructureMap.Container;
@@ -12,16 +15,31 @@ namespace Poisk.Controllers
     /// </summary>
     internal class GameController
     {
-        private Container _container;
-        private Display _display;
+        private readonly Container _container;
         private IPlayerFactory _playerFactory;
 
+        /// <summary>
+        /// Contains the main game loop.
+        /// </summary>
         public GameController()
         {
             _container = CreateContainer();
-            _display = new Display();
+            var display = new Display();
+            var pc = CreatePlayer(display.PlayerName);
+            var playerActionDictionary = GetPlayerActionDictionary();
 
-            var pc = CreatePlayer(_display.PlayerName);
+            while (pc.IsAlive)
+            {
+                var validResponses = playerActionDictionary.Keys.ToList();
+                display.DisplayMessage("Available actions are " + string.Join(", ", validResponses) + ".");
+                var playerResponse = display.PromptForValidResponse(validResponses);
+                var playerAction = playerActionDictionary[playerResponse];
+                display.DisplayMessage("Player has taken the " + playerAction + " action.");
+                if (playerAction == PlayerAction.Exit)
+                    break;
+            }
+
+            display.DisplayMessage("Game Over");
         }
 
         private IBeing CreatePlayer(string playerName)
@@ -39,6 +57,16 @@ namespace Poisk.Controllers
             {
                 x.AddRegistry<CoreRegistry>();
             });
+        }
+
+        /// <summary>
+        /// Returns a dictionary of string to <see cref="PlayerAction"/> enum key value pairs.
+        /// </summary>
+        private Dictionary<string, PlayerAction> GetPlayerActionDictionary()
+        {
+            var actions = Enum.GetValues(typeof (PlayerAction))
+                .Cast<PlayerAction>();
+            return actions.ToDictionary(a => a.ToString());
         }
     }
 }
