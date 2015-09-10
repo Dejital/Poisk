@@ -22,7 +22,7 @@ namespace Poisk.Views
         /// Prompts a player to respond with a valid response and return said response.
         /// </summary>
         /// <returns></returns>
-        public string PromptForValidResponse(List<string> validResponses)
+        public string PromptUserForValidResponse(List<string> validResponses)
         {
             var response = "";
             while (!validResponses.Contains(response))
@@ -36,7 +36,7 @@ namespace Poisk.Views
         /// <summary>
         /// Prompts the user with a provided message and requires a non-empty response.
         /// </summary>
-        public string GetNonEmptyStringResponse(string message, bool playSuccessChime = false)
+        public string PromptUserForNonEmptyStringResponse(string message, bool playSuccessChime = false)
         {
             var response = "";
             while (string.IsNullOrEmpty(response))

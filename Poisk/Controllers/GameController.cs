@@ -27,7 +27,7 @@ namespace Poisk.Controllers
             var display = new Display();
             display.DisplayMessage("Welcome to Poisk.");
 
-            var playerName = display.GetNonEmptyStringResponse("What is your name?");
+            var playerName = display.PromptUserForNonEmptyStringResponse("What is your name?", true);
             var pc = CreatePlayer(playerName);
             var playerActionDictionary = GetPlayerActionDictionary();
 
@@ -35,7 +35,7 @@ namespace Poisk.Controllers
             {
                 var validResponses = playerActionDictionary.Keys.ToList();
                 display.DisplayMessage("Available actions are " + string.Join(", ", validResponses) + ".");
-                var playerResponse = display.PromptForValidResponse(validResponses);
+                var playerResponse = display.PromptUserForValidResponse(validResponses);
                 var playerAction = playerActionDictionary[playerResponse];
                 display.DisplayMessage("Player has taken the " + playerAction + " action.");
                 if (playerAction == PlayerAction.Exit)
@@ -43,12 +43,6 @@ namespace Poisk.Controllers
             }
 
             display.DisplayMessage("Game Over");
-        }
-
-        private IBeing CreatePlayer(string playerName)
-        {
-            _playerFactory = _container.GetInstance<IPlayerFactory>();
-            return _playerFactory.BuildPlayer(playerName);
         }
 
         /// <summary>
@@ -60,6 +54,15 @@ namespace Poisk.Controllers
             {
                 x.AddRegistry<CoreRegistry>();
             });
+        }
+
+        /// <summary>
+        /// Returns a playable character.
+        /// </summary>
+        private IBeing CreatePlayer(string playerName)
+        {
+            _playerFactory = _container.GetInstance<IPlayerFactory>();
+            return _playerFactory.BuildPlayer(playerName);
         }
 
         /// <summary>
